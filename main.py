@@ -2,9 +2,7 @@ import streamlit as st
 import pandas as pd
 from bardapi import Bard
 import hashlib
-import os
 import requests
-os.environ['_BARD_API_KEY'] = 'Xwj5sfmrsfGL9g3zWl9rXraYuI1le4jaKjisCN2BHWrH4CbuZN-tGC-gyiHkrNYvttZdtA.'
 token='Xwj5sfmrsfGL9g3zWl9rXraYuI1le4jaKjisCN2BHWrH4CbuZN-tGC-gyiHkrNYvttZdtA.'
 
 session = requests.Session()
@@ -16,8 +14,8 @@ session.headers = {
             "Origin": "https://bard.google.com",
             "Referer": "https://bard.google.com/",
         }
-session.cookies.set("__Secure-1PSID", os.getenv("_BARD_API_KEY")) 
-# session.cookies.set("__Secure-1PSID", token) 
+ 
+session.cookies.set("__Secure-1PSID", token) 
 
 bard = Bard(token=token, session=session, timeout=30)
 PASSWORD_HASH = "c0a16a726686f7c44f99536443e6b942ba4cd80e5bd81a739ab63698a4368302"
