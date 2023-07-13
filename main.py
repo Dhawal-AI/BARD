@@ -69,7 +69,7 @@ def main():
 
             # Option to download results as CSV
             if st.button('Save Predictions'):
-            save_to_csv(df)
+                save_to_csv(df)
             
 def save_to_csv(df):
     # Save the DataFrame to a CSV file in the "Downloads" directory
