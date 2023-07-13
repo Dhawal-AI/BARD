@@ -2,9 +2,24 @@ import streamlit as st
 import pandas as pd
 from bardapi import Bard
 import hashlib
-# Initialize Bard API
-bard_token = 'Xwj5sVDzqYsdp-biewkbpM26kz7DmFI1KENySgrFflnFoGaD3SnrP6EMvUYTYOpuWI4qkw.'
-bard = Bard(token=bard_token, timeout=10)
+import os
+import requests
+os.environ['_BARD_API_KEY'] = 'Xwj5sfmrsfGL9g3zWl9rXraYuI1le4jaKjisCN2BHWrH4CbuZN-tGC-gyiHkrNYvttZdtA.'
+token='Xwj5sfmrsfGL9g3zWl9rXraYuI1le4jaKjisCN2BHWrH4CbuZN-tGC-gyiHkrNYvttZdtA.'
+
+session = requests.Session()
+session.headers = {
+            "Host": "bard.google.com",
+            "X-Same-Domain": "1",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36",
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            "Origin": "https://bard.google.com",
+            "Referer": "https://bard.google.com/",
+        }
+session.cookies.set("__Secure-1PSID", os.getenv("_BARD_API_KEY")) 
+# session.cookies.set("__Secure-1PSID", token) 
+
+bard = Bard(token=token, session=session, timeout=30)
 PASSWORD_HASH = "c0a16a726686f7c44f99536443e6b942ba4cd80e5bd81a739ab63698a4368302"
 # Generate program based on PICOS criteria, title, and abstract
 def generate_program(picos_criteria, title, abstract):
