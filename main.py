@@ -4,7 +4,7 @@ from bardapi import Bard
 import hashlib
 # Initialize Bard API
 bard_token = 'Xwj5sVDzqYsdp-biewkbpM26kz7DmFI1KENySgrFflnFoGaD3SnrP6EMvUYTYOpuWI4qkw.'
-bard = Bard(token=bard_token,proxies={'http':'http://127.0.0.1:1080', 'https':'http://0.0.0.0:1080'}, timeout=10)
+bard = Bard(token=bard_token,proxies={'http':'http://127.0.0.1:1080', 'https':'http://127.0.0.1:1080'}, timeout=10)
 PASSWORD_HASH = "c0a16a726686f7c44f99536443e6b942ba4cd80e5bd81a739ab63698a4368302"
 # Generate program based on PICOS criteria, title, and abstract
 def generate_program(picos_criteria, title, abstract):
