@@ -4,9 +4,14 @@ from bardapi import Bard
 import hashlib
 import requests
 import asyncio
-from bardapi import BardAsync
-    
-bard = BardAsync(token="Xwj5sfmrsfGL9g3zWl9rXraYuI1le4jaKjisCN2BHWrH4CbuZN-tGC-gyiHkrNYvttZdtA.")
+from bardapi import BardCookies
+
+cookie_dict = {
+    "__Secure-1PSID": "Xwj5sfmrsfGL9g3zWl9rXraYuI1le4jaKjisCN2BHWrH4CbuZN-tGC-gyiHkrNYvttZdtA."
+    # Any cookie values you want to pass session object.
+}
+
+bard = BardCookies(cookie_dict=cookie_dict)
 PASSWORD_HASH = "c0a16a726686f7c44f99536443e6b942ba4cd80e5bd81a739ab63698a4368302"
 # Generate program based on PICOS criteria, title, and abstract
 def generate_program(picos_criteria, title, abstract):
@@ -56,7 +61,7 @@ def main():
                 abstract = row['Abstract']
                 message='''act as an automatic Systematic literature reviewer, I will give you a picos criteria and based on that you have to accept or reject a study based on its title and abstract,be strict with picos,
 '''+str(generate_program(picos_criteria,df['Title'][i],df['Abstract'][i]))+"Keep your answer concise upto 250 words"
-                response = asyncio.run(bard.get_answer(message))
+                response =(bard.get_answer(message))
                 result = response['content']
                 df_subset.at[i, 'resultsbard'] = result
 
